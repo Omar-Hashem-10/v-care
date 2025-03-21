@@ -3,7 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\Rule;
+
+
 
 class DoctorTitleRequest extends FormRequest
 {
@@ -27,7 +30,7 @@ class DoctorTitleRequest extends FormRequest
                     'required',
                     'min:3',
                     'max:50',
-                    Rule::unique('doctor_titles')->ignore($this->route('doctorTitle')->id, 'id')
+                    Rule::unique('doctor_titles')->ignore(Request::route('doctorTitle')?->id, 'id')
                 ]
         ];
     }

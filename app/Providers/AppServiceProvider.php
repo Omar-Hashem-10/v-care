@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Faker\DoctorTitleProvider;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -12,7 +13,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        Response::macro('success', function($data, $message = "Success", $status = 200)
+        {
+            return response()->json([
+                "success" => true,
+                "message" => $message,
+                "data" => $data
+            ], $status);
+        });
     }
 
     /**
