@@ -7,6 +7,8 @@ use App\Faker\ZoneProvider;
 use App\Faker\CountryProvider;
 use App\Faker\DoctorTitleProvider;
 use App\Faker\SpecialityProvider;
+use App\Repository\DoctorTitleRepository;
+use App\Repository\Interfaces\DoctorTitleInterface;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Response;
 
@@ -17,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        app()->bind(DoctorTitleInterface::class, DoctorTitleRepository::class);
+
+
         Response::macro('success', function($data, $message = "Success", $status = 200)
         {
             return response()->json([
